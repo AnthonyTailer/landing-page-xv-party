@@ -29,6 +29,7 @@ function App() {
         controls={false}
         autoPlay
         muted
+        playsInline
       />
       {showButtons && (
         <div className='link-button-container'>
