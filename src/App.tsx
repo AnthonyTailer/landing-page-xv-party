@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import './App.css'
 import ScrollVideo from "./assets/gabrielly-xv-party.mp4"
-import BackgroundImg from "./assets/background.svg"
+import BackgroundImg from "./assets/frame-background.svg"
 
 
 function App() {
