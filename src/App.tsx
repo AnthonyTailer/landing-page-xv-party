@@ -1,34 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useRef, useState } from 'react'
+
 import './App.css'
+import ScrollVideo from "./assets/gabrielly-xv-party.mp4"
+import BackgroundImg from "./assets/background.svg"
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [showButtons, setShowButtons] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+     setShowButtons(true)
+    }, 4000) // espera 1 segundo antes de iniciar o vídeo
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      position: 'relative',
+      background: `url('${BackgroundImg}') no-repeat center center fixed`,
+      backgroundSize: 'cover',
+    }}>
+      <video
+        ref={videoRef}
+        src={ScrollVideo}
+        style={{
+          maxWidth: '100vw',
+          maxHeight: '80vh',
+          height: "auto"
+        }}
+        controls={false}
+        autoPlay
+        muted
+      />
+      {showButtons && (
+        <div style={{
+          position: 'absolute',
+          left: '50%',
+          top: 'calc(50% + 132px)', // ajusta a distância abaixo do vídeo conforme necessário
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          flexDirection: "column",
+          gap: '10px',
+          zIndex: 2
+        }}>
+          <a
+            className='link-button'
+          >
+            Confirmar presença
+          </a>
+          <a
+            className='link-button'
+          >
+            Localização do Salão
+          </a>
+        </div>
+      )}
+    </div>
   )
 }
 
